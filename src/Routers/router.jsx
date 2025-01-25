@@ -32,6 +32,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/forumdetails",
+    element: <ForumDetailsPage></ForumDetailsPage>,
+  },
+  {
     path: "*",
     element: <h1>Error</h1>,
   },

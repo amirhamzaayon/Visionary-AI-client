@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const FeatureForum = () => {
   return (
     <div className="w-1/3 p-6 min-h-48 bg-slate-50 rounded-2xl">
@@ -11,16 +13,19 @@ export const FeatureForum = () => {
           Written By <strong>Author Name</strong>
         </p>
       </div>
-      <div className="flex flex-row items-center justify-between text-lg">
+      <div className="flex flex-row items-center justify-between p-2 mt-4 text-lg bg-gray-200 rounded-md">
         <div>
-          <strong>20+🔥</strong>
+          <strong>🔥 20+</strong>
         </div>
         <div>
           <strong>5+ Comments</strong>
         </div>
-        <button className="w-1/3 py-2 mt-4 text-lg text-white rounded-md bg-slate-800">
+        <Link
+          to="/forumdetails"
+          className="w-1/3 py-2 text-lg text-white rounded-md bg-slate-800 text-center"
+        >
           Read More
-        </button>
+        </Link>
       </div>
     </div>
   );

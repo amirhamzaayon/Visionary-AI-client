@@ -1,7 +1,7 @@
 import { NavBar } from "../Components/Navbar";
 import { HeroSection } from "../Components/Hero Section/HeroSection";
 // import { Announcement } from "../Components/Announcement";
-import { Testimonial } from "../Components/Testimonial";
+// import { Testimonial } from "../Components/Testimonial";
 import { MembershipPriceCards } from "../Components/MembershipPriceCards";
 import { Footer } from "../Components/Footer";
 import { ForumCards } from "../Components/Forum section/ForumCards";
@@ -9,7 +9,7 @@ import { ForumCards } from "../Components/Forum section/ForumCards";
 export const HomePageLayout = () => {
   return (
     <div className="font-roboto">
-      <header className="w-10/12 mx-auto mt-6 mb-6">
+      <header className="w-10/12 mx-auto mt-6 ">
         <NavBar></NavBar>
         <HeroSection></HeroSection>
       </header>
@@ -17,7 +17,7 @@ export const HomePageLayout = () => {
         {/* <section className="w-10/12 py-12 mx-auto mb-6">
           <Announcement></Announcement>
         </section> */}
-        <section id="ServiceCards" className="w-10/12 py-12 mx-auto mb-6">
+        <section id="ServiceCards" className="w-10/12 py-12 mx-auto ">
           <ForumCards></ForumCards>
         </section>
         {/* <section className="w-10/12 py-12 mx-auto mb-6">
