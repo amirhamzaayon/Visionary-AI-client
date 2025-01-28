@@ -115,7 +115,7 @@ export const NavBar = () => {
                   </a>
                 </li>
                 <li>
-                  <a>Dashboard</a>
+                  <Link to="/dashboard/user">Dashboard</Link>
                 </li>
                 {/* <li>
                   <a>Update Profile</a>

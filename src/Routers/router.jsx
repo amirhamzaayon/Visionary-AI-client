@@ -4,6 +4,12 @@ import { ForumDetailsPage } from "../Pages/ForumDetailsPage";
 import { AuthLayout } from "../Layouts/AuthLayout";
 import { Register } from "../Pages/Register";
 import { LoginPage } from "../Pages/LoginPage";
+import { NavbarNavigationLayout } from "../Layouts/NavbarNavigationLayout";
+import { UserDashboardLayout } from "../Layouts/UserDashboardLayout";
+import { AdminDashboardLayout } from "../Layouts/AdminDashboardLayout";
+import { MyProfile } from "../Components/Dashboard - User/MyProfile";
+import { MyPost } from "../Components/Dashboard - User/MyPost";
+import { AddPost } from "../Components/Dashboard - User/AddPost";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +40,48 @@ const router = createBrowserRouter([
   {
     path: "/forumdetails",
     element: <ForumDetailsPage></ForumDetailsPage>,
+  },
+  {
+    path: "/dashboard",
+    element: <NavbarNavigationLayout />,
+    children: [
+      {
+        path: "user",
+        element: <UserDashboardLayout />,
+        children: [
+          {
+            path: "userprofile",
+            element: <MyProfile></MyProfile>,
+          },
+          {
+            path: "userposts",
+            element: <MyPost></MyPost>,
+          },
+          {
+            path: "useraddpost",
+            element: <AddPost></AddPost>,
+          },
+        ],
+      },
+      {
+        path: "admin",
+        element: <AdminDashboardLayout />,
+        children: [
+          {
+            // path: "profile",
+            // element: <AdminProfile />,
+          },
+          {
+            // path: "posts",
+            // element: <AdminPosts />,
+          },
+          {
+            // path: "add-post",
+            // element: <AddAdminPost />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "*",
