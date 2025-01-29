@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const AddPost = () => {
+export const AddPost = () => {
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
@@ -154,5 +154,3 @@ const AddPost = () => {
     </div>
   );
 };
-
-export default AddPost;

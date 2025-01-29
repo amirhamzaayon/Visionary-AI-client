@@ -117,6 +117,9 @@ export const NavBar = () => {
                 <li>
                   <Link to="/dashboard/user">Dashboard</Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/admin">Admin Dashboard</Link>
+                </li>
                 {/* <li>
                   <a>Update Profile</a>
                 </li> */}

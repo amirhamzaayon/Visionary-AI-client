@@ -10,6 +10,10 @@ import { AdminDashboardLayout } from "../Layouts/AdminDashboardLayout";
 import { MyProfile } from "../Components/Dashboard - User/MyProfile";
 import { MyPost } from "../Components/Dashboard - User/MyPost";
 import { AddPost } from "../Components/Dashboard - User/AddPost";
+import { AdminProfile } from "../Components/Dashboard - Admin/AdminProfile";
+import { ManageReportsByAdmin } from "../Components/Dashboard - Admin/ManageReportsByAdmin";
+import { ManageUsersByAdmin } from "../Components/Dashboard - Admin/ManageUsersByAdmin";
+import { MakeAnnouncementByAdmin } from "../Components/Dashboard - Admin/MakeAnnouncementByAdmin";
 
 const router = createBrowserRouter([
   {
@@ -68,16 +72,20 @@ const router = createBrowserRouter([
         element: <AdminDashboardLayout />,
         children: [
           {
-            // path: "profile",
-            // element: <AdminProfile />,
+            path: "adminprofile",
+            element: <AdminProfile />,
           },
           {
-            // path: "posts",
-            // element: <AdminPosts />,
+            path: "manageusers",
+            element: <ManageUsersByAdmin />,
           },
           {
-            // path: "add-post",
-            // element: <AddAdminPost />,
+            path: "managereports",
+            element: <ManageReportsByAdmin />,
+          },
+          {
+            path: "makeaunouncements",
+            element: <MakeAnnouncementByAdmin />,
           },
         ],
       },
