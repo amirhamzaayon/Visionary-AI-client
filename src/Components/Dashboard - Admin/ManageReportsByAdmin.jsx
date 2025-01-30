@@ -48,8 +48,23 @@ export const ManageReportsByAdmin = () => {
                   <td>
                     <p>Reporter Name</p> <p>reporter@email.com</p>
                   </td>
-                  <td className="space-x-2 ">
-                    <button className="btn">Take Action</button>
+                  <td>
+                    <div className="dropdown">
+                      <div tabIndex={0} role="button" className="m-1 btn">
+                        Take Action
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="p-2 shadow-sm dropdown-content menu bg-base-100 rounded-box z-1 w-52"
+                      >
+                        <li>
+                          <a>Delete Comment</a>
+                        </li>
+                        <li>
+                          <a>Reject Report</a>
+                        </li>
+                      </ul>
+                    </div>
                   </td>
                 </tr>
               </tbody>

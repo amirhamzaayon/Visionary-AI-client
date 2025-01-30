@@ -17,7 +17,40 @@ export const AdminProfile = () => {
       <div>
         <h3 className="p-4 text-xl ">Recent Posts</h3>
         <hr className="h-px bg-gray-300 border-0" />
-        <div className="flex flex-col gap-4 my-4">None</div>
+        <div className="flex flex-col gap-4 my-4">
+          <div className="flex flex-row h-56 gap-4 p-2 border rounded-box border-base-content/5 bg-base-200">
+            <div className="h-full bg-base-100 grow-1">
+              <div>
+                <div className="p-4 m-2 font-medium text-center rounded-box bg-slate-100">
+                  <p>Total Users</p>
+                </div>
+                <div className="text-5xl font-bold text-center ">
+                  <p>50</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-full bg-base-100 grow-1">
+              <div>
+                <div className="p-4 m-2 font-medium text-center rounded-box bg-slate-100">
+                  <p>Total Posts</p>
+                </div>
+                <div className="text-5xl font-bold text-center ">
+                  <p>50</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-full bg-base-100 grow-1">
+              <div>
+                <div className="p-4 m-2 font-medium text-center rounded-box bg-slate-100">
+                  <p>Total Comments</p>
+                </div>
+                <div className="text-5xl font-bold text-center ">
+                  <p>50</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
