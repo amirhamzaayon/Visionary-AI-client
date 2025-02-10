@@ -42,8 +42,10 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/forumdetails",
+    path: "/forumdetails/:id",
     element: <ForumDetailsPage></ForumDetailsPage>,
+    loader: ({ params }) =>
+      fetch(`http://localhost:5000/postdetails/${params.id}`),
   },
   {
     path: "/dashboard",

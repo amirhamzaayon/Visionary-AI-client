@@ -3,7 +3,7 @@ import { ForumComments } from "../Components/Forum Details Page/ForumComments";
 import { ForumDetails } from "../Components/Forum Details Page/ForumDetails";
 import { NavBar } from "../Components/Navbar";
 import { AuthContext } from "../Providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AddCommentForm } from "../Components/Forum Details Page/AddCommentForm";
 
 export const ForumDetailsPage = () => {
@@ -13,6 +13,8 @@ export const ForumDetailsPage = () => {
   const navigate = useNavigate();
 
   // console.log(rating);
+  const { comments, ...forumDetails } = useLoaderData() || {};
+  console.log(forumDetails, comments);
 
   const handleOpenPopup = () => setIsCommentFormOpen(true);
   const handleClosePopup = () => setIsCommentFormOpen(false);
@@ -32,14 +34,14 @@ export const ForumDetailsPage = () => {
       </div>
       <section className="container flex min-h-screen gap-4 p-6 mx-auto rounded-lg outline-lime-100 bg-slate-50">
         <div className="w-1/2 bg-white rounded-md">
-          <ForumDetails></ForumDetails>
+          <ForumDetails forumDetails={forumDetails}></ForumDetails>
         </div>
         <div className="w-1/2 bg-white rounded-md">
           <div className="flex items-center justify-between gap-4 p-4 m-6 bg-gray-100 rounded-lg">
             <h3 className="text-2xl font-bold">Comments</h3>
             <div>{/* <p>Total Comment:</p> */}</div>
           </div>
-          <ForumComments></ForumComments>
+          <ForumComments comments={comments}></ForumComments>
           <button className="m-6 btn" onClick={handleOpenPopup}>
             Add Comment
           </button>

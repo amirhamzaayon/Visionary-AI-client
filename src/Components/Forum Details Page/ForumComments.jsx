@@ -1,9 +1,12 @@
 import { ForumComment } from "./ForumComment";
 
-export const ForumComments = () => {
+export const ForumComments = ({ comments }) => {
+  console.log(comments);
   return (
     <div>
-      <ForumComment></ForumComment>
+      {comments.map((comment, index) => (
+        <ForumComment key={index} comment={comment}></ForumComment>
+      ))}
     </div>
   );
 };

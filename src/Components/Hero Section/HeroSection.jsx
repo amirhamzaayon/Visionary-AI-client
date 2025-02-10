@@ -1,7 +1,30 @@
+import { useEffect, useState } from "react";
 import { FeatureForum } from "../../Layouts/FeatureForum";
 import { Announcement } from "../Announcement";
+import Slider from "react-slick";
 
 export const HeroSection = () => {
+  const [featureForums, setFeatureForums] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/top-posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setFeatureForums(data);
+      })
+      .catch((error) => console.error("Error fetching categories:", error));
+  });
+
+  const settings = {
+    dots: true, // Enable dots at the bottom
+    infinite: true, // Infinite looping
+    speed: 500, // Transition speed
+    slidesToShow: 3, // Show one slide at a time
+    slidesToScroll: 1, // Scroll one slide at a time
+    autoplay: true, // Auto-slide
+    autoplaySpeed: 3000, // Time between slides (in ms)
+  };
+
   return (
     <div className="w-full min-h-screen px-40 pt-40 mt-6 bg-slate-200 rounded-2xl">
       <div className="space-y-6 text-3xl text-gray-900 ">
@@ -19,9 +42,14 @@ export const HeroSection = () => {
         </div>
         <div className="space-y-6 ">
           <p>🟠 Popular Topics Shaping AI Today:</p>
-          <div className="flex flex-row gap-6">
-            <FeatureForum></FeatureForum>
-          </div>
+
+          <Slider {...settings}>
+            {featureForums.map((feature, index) => (
+              <div key={index} className="p-2">
+                <FeatureForum key={index} feature={feature}></FeatureForum>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
       <div className="mt-32">
