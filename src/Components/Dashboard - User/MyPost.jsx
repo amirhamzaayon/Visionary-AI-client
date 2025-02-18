@@ -1,22 +1,19 @@
 import { useState } from "react";
+import { MyPostHeader } from "./MyPostHeader";
+import { Link, useOutletContext } from "react-router-dom";
 
 export const MyPost = () => {
   const [close, setClose] = useState(false);
+  const [postComments, setPostComments] = useState([]);
+  const { myPosts } = useOutletContext();
+  console.log(postComments);
+
+  const handleOpenComments = (post) => {
+    setPostComments(post);
+    setClose(!close);
+  };
   return (
-    <div className="min-h-screen p-4 bg-white rounded-xl">
-      <div className="flex flex-row justify-between p-2 bg-gray-100 rounded-lg">
-        <div className="flex flex-row items-center gap-4">
-          <img className="w-10 border-2 rounded-full" src="" alt="" />
-          <div>
-            <p>
-              <strong>Author Name</strong>
-              <span className="mx-2 rounded-full badge">Gold</span>
-            </p>
-            <p>author@gmail.com</p>
-          </div>
-        </div>
-        {/* <button className="btn">Update Profile</button> */}
-      </div>
+    <div className="">
       <div>
         <h3 className="p-4 text-xl ">Mangae Your Post Activity</h3>
         <hr className="h-px bg-gray-300 border-0" />
@@ -30,28 +27,36 @@ export const MyPost = () => {
                   <th>Post Title</th>
                   <th>Post Category</th>
                   <th>Upvote</th>
+                  <th>Downvote</th>
                   <th></th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {/* row 1 */}
-                <tr>
-                  <th>1</th>
-                  <td>Title</td>
-                  <td>
-                    <p className="rounded-full badge">Category</p>
-                  </td>
-                  <td>🔥10 </td>
-                  <td className="space-x-2 ">
-                    <button onClick={() => setClose(!close)} className="btn">
-                      Review Comments
-                    </button>
-                  </td>
-                  <td>
-                    <button className="btn">Delete</button>
-                  </td>
-                </tr>
+                {myPosts.map((post, index) => (
+                  <tr key={post._id || index}>
+                    <th>1</th>
+                    <td>{post.authorName}</td>
+                    <td>
+                      <p className="rounded-full badge">{post.tag[0]}</p>
+                    </td>
+                    <td>🔥{post.totalUpvote} </td>
+                    <td>⬇️ {post.totalDownvote} </td>
+                    <td className="space-x-2 ">
+                      <Link
+                        // to={`/reviewcomments/${post._id}`}
+                        onClick={() => handleOpenComments(post.comments)}
+                        className="btn"
+                      >
+                        Review Comments
+                      </Link>
+                    </td>
+                    <td>
+                      <button className="btn">Delete</button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -77,40 +82,42 @@ export const MyPost = () => {
                   </thead>
                   <tbody>
                     {/* row 1 */}
-                    <tr>
-                      <th>1</th>
-                      <td>
-                        <p>Commentor Name</p> <p>comentor@email.com</p>
-                      </td>
-                      <td>
-                        <p>Showing Comment</p>
-                      </td>
-                      <td>
-                        <p className="rounded-full badge">Null</p>
-                      </td>
+                    {postComments.map((comment, index) => (
+                      <tr key={index}>
+                        <th>{index + 1}</th>
+                        <td>
+                          <p>{comment.userName}</p> <p>{comment.userEmail}</p>
+                        </td>
+                        <td>
+                          <p>{comment.comment}</p>
+                        </td>
+                        <td>
+                          <p className="rounded-full badge">Null</p>
+                        </td>
 
-                      <td>
-                        <div className="dropdown">
-                          <div tabIndex={0} role="button" className="m-1 btn">
-                            Take Action
+                        <td>
+                          <div className="dropdown">
+                            <div tabIndex={0} role="button" className="m-1 btn">
+                              Take Action
+                            </div>
+                            <ul
+                              tabIndex={0}
+                              className="p-2 shadow-sm dropdown-content menu bg-base-100 rounded-box z-1 w-52"
+                            >
+                              <li>
+                                <a>Depreciating</a>
+                              </li>
+                              <li>
+                                <a>Disparaging</a>
+                              </li>
+                              <li>
+                                <a>Backlashes</a>
+                              </li>
+                            </ul>
                           </div>
-                          <ul
-                            tabIndex={0}
-                            className="p-2 shadow-sm dropdown-content menu bg-base-100 rounded-box z-1 w-52"
-                          >
-                            <li>
-                              <a>Depreciating</a>
-                            </li>
-                            <li>
-                              <a>Disparaging</a>
-                            </li>
-                            <li>
-                              <a>Backlashes</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

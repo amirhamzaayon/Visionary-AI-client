@@ -1,24 +1,27 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const AddPost = () => {
   const navigate = useNavigate();
-
   const { user } = useContext(AuthContext);
 
-  const handleAddService = (e) => {
+  const handleAddPost = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     // console.log(formData.entries())
     const initialData = Object.fromEntries(formData.entries());
 
     // Add additional data
-    initialData.ownerEmail = user?.email || "anonymous@example.com"; // Default to anonymous if user is undefined
-    initialData.ownerName = user?.displayName || "Anonymous"; // Default to Anonymous if displayName is not available
-    initialData.reviewsInfo = [{ averageRating: 0 }, { totalReviews: 0 }]; // Add a default reviewInfo object
-    initialData.reviews = []; // Add an empty reviews array
-    initialData.addedDate = new Date()
+    initialData.authorEmail = user?.email || "anonymous@example.com";
+    initialData.authorName = user?.displayName || "Anonymous";
+    initialData.authorProfile = user?.photoURL;
+    initialData.totalUpvote = 0;
+    initialData.totalDownvote = 0;
+    initialData.totalComments = 0;
+    initialData.comments = [];
+    initialData.postAddedDate = new Date()
       .toLocaleString("en-US", {
         year: "numeric",
         month: "2-digit",
@@ -31,7 +34,7 @@ export const AddPost = () => {
 
     console.log(initialData);
 
-    fetch("https://insight-hub-server.vercel.app/services", {
+    fetch(`http://localhost:5000/newpost`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,7 +51,7 @@ export const AddPost = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/features/MyServices");
+          navigate("/dashboard/user/userprofile");
         }
       });
   };
@@ -56,7 +59,7 @@ export const AddPost = () => {
   return (
     <div>
       <div className="max-w-full p-8 bg-white rounded-lg shadow-lg ">
-        <form onSubmit={handleAddService} className="space-y-6">
+        <form onSubmit={handleAddPost} className="space-y-6">
           {/* Row 1 */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
@@ -65,7 +68,7 @@ export const AddPost = () => {
               </label>
               <input
                 type="text"
-                name="companyName"
+                name="postTitle"
                 className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-black focus:border-black"
                 placeholder="Enter your post title"
               />
@@ -86,18 +89,18 @@ export const AddPost = () => {
                 Category
               </label>
               <select
-                name="category"
+                name="tag"
                 className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-black focus:border-black"
               >
                 <option selected disabled>
                   Please Select an Category
                 </option>
-                <option>Electrical</option>
-                <option>Health Care</option>
-                <option>Pet Care</option>
-                <option>Car Repair</option>
-                <option>Food</option>
-                <option>Travel</option>
+                <option>AI</option>
+                <option>Date Science</option>
+                <option>Mechine Learning</option>
+                <option>AI Agent</option>
+                <option>LLM</option>
+                <option>Generative AI</option>
                 <option>Other</option>
               </select>
             </div>
@@ -111,7 +114,7 @@ export const AddPost = () => {
               </label>
               <input
                 type="text"
-                name="serviceImage"
+                name="postImage"
                 className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-black focus:border-black"
                 placeholder="Enter image file path"
               />
@@ -135,7 +138,7 @@ export const AddPost = () => {
               Post Description
             </label>
             <textarea
-              name="description"
+              name="postDescription"
               className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-black focus:border-black"
               placeholder="Wirte your post"
               rows="4"

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export const ForumCard = ({ card }) => {
-  console.log(card);
+  // console.log(card);
   return (
     <div className="w-full p-6 min-h-48 bg-slate-50 rounded-2xl">
       <div className="flex flex-row justify-between">
