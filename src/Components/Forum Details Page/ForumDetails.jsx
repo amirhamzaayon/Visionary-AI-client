@@ -48,7 +48,11 @@ export const ForumDetails = ({ forumDetails }) => {
     <div className="flex flex-col gap-4 p-6 rounded-lg">
       <div className="flex flex-row justify-between p-2 bg-gray-100 rounded-lg">
         <div className="flex flex-row items-center gap-4">
-          <img className="w-10 border-2 rounded-full" src="" alt="" />
+          <img
+            className="w-10 border-2 rounded-full"
+            src={forumDetails.authorProfile}
+            alt=""
+          />
           <div>
             <p>
               <strong>{forumDetails.authorName}</strong>

@@ -12,6 +12,38 @@ export const MyPost = () => {
     setPostComments(post);
     setClose(!close);
   };
+
+  const handleFeedbackButton = (comment, feedback) => {
+    const reportInfo = { ...comment, feedback: feedback };
+    console.log(reportInfo);
+
+    fetch(`http://localhost:5000/report`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reportInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          alert("Report added successfully!");
+        }
+      })
+      .catch((error) => console.error("Error adding review:", error));
+  };
+
+  const handleDeletePost = (postID) => {
+    fetch(`http://localhost:5000/post/delete/${postID}`, { method: "delete" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          alert("Rost Deleted successfully!");
+        }
+      })
+      .catch((error) => console.error("Error adding review:", error));
+  };
+
   return (
     <div className="">
       <div>
@@ -37,7 +69,7 @@ export const MyPost = () => {
                 {myPosts.map((post, index) => (
                   <tr key={post._id || index}>
                     <th>1</th>
-                    <td>{post.authorName}</td>
+                    <td>{post.postTitle}</td>
                     <td>
                       <p className="rounded-full badge">{post.tag[0]}</p>
                     </td>
@@ -53,7 +85,12 @@ export const MyPost = () => {
                       </Link>
                     </td>
                     <td>
-                      <button className="btn">Delete</button>
+                      <button
+                        onClick={() => handleDeletePost(post._id)}
+                        className="btn"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -92,7 +129,7 @@ export const MyPost = () => {
                           <p>{comment.comment}</p>
                         </td>
                         <td>
-                          <p className="rounded-full badge">Null</p>
+                          <p className="rounded-full badge">None</p>
                         </td>
 
                         <td>
@@ -105,13 +142,43 @@ export const MyPost = () => {
                               className="p-2 shadow-sm dropdown-content menu bg-base-100 rounded-box z-1 w-52"
                             >
                               <li>
-                                <a>Depreciating</a>
+                                <button
+                                  onClick={() =>
+                                    handleFeedbackButton(comment, "Misleading")
+                                  }
+                                >
+                                  Misleading
+                                </button>
                               </li>
                               <li>
-                                <a>Disparaging</a>
+                                <button
+                                  onClick={() =>
+                                    handleFeedbackButton(
+                                      comment,
+                                      "Depreciating"
+                                    )
+                                  }
+                                >
+                                  Depreciating
+                                </button>
                               </li>
                               <li>
-                                <a>Backlashes</a>
+                                <button
+                                  onClick={() =>
+                                    handleFeedbackButton(comment, "Disparaging")
+                                  }
+                                >
+                                  Disparaging
+                                </button>
+                              </li>
+                              <li>
+                                <button
+                                  onClick={() =>
+                                    handleFeedbackButton(comment, "Backlashes")
+                                  }
+                                >
+                                  Backlashes
+                                </button>
                               </li>
                             </ul>
                           </div>
