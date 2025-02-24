@@ -51,7 +51,7 @@ export const AddPost = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/dashboard/user/userprofile");
+          navigate(`/dashboard/user/userposts`);
         }
       });
   };

@@ -10,10 +10,11 @@ import { AdminDashboardLayout } from "../Layouts/AdminDashboardLayout";
 import { MyProfile } from "../Components/Dashboard - User/MyProfile";
 import { MyPost } from "../Components/Dashboard - User/MyPost";
 import { AddPost } from "../Components/Dashboard - User/AddPost";
-import { AdminProfile } from "../Components/Dashboard - Admin/AdminProfile";
+
 import { ManageReportsByAdmin } from "../Components/Dashboard - Admin/ManageReportsByAdmin";
 import { ManageUsersByAdmin } from "../Components/Dashboard - Admin/ManageUsersByAdmin";
 import { MakeAnnouncementByAdmin } from "../Components/Dashboard - Admin/MakeAnnouncementByAdmin";
+import { AdminDashboardData } from "../Components/Dashboard - Admin/AdminDashboardData";
 
 const router = createBrowserRouter([
   {
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "adminprofile",
-            element: <AdminProfile />,
+            element: <AdminDashboardData />,
           },
           {
             path: "manageusers",

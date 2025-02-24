@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { UserSideMenu } from "../Components/Dashboard - User/UserSideMenu";
-import { MyPostHeader } from "../Components/Dashboard - User/MyPostHeader";
+import { UserProfileHeader } from "../Components/Dashboard - User/UserProfileHeader";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 
@@ -35,7 +35,7 @@ export const UserDashboardLayout = () => {
         <UserSideMenu></UserSideMenu>
       </div>
       <div className="w-full min-h-screen p-4 bg-white rounded-xl">
-        <MyPostHeader user={user}></MyPostHeader>
+        <UserProfileHeader user={user}></UserProfileHeader>
         <Outlet context={userDashboardData} />
       </div>
     </div>

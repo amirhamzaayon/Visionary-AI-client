@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <div>
       <footer
-        className="p-10 footer bg-base-200 text-base-content rounded-t-2xl"
+        className="flex justify-between p-10 footer bg-base-200 text-base-content rounded-t-2xl"
         data-theme="light"
       >
         <nav>

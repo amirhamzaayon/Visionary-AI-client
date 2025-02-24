@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { MyPostHeader } from "./MyPostHeader";
-import { Link, useOutletContext } from "react-router-dom";
+
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 export const MyPost = () => {
+  const navigate = useNavigate();
   const [close, setClose] = useState(false);
   const [postComments, setPostComments] = useState([]);
   const { myPosts } = useOutletContext();
@@ -28,6 +29,7 @@ export const MyPost = () => {
       .then((data) => {
         if (data.message) {
           alert("Report added successfully!");
+          navigate(`/dashboard/user/userposts`);
         }
       })
       .catch((error) => console.error("Error adding review:", error));
@@ -39,6 +41,7 @@ export const MyPost = () => {
       .then((data) => {
         if (data.message) {
           alert("Rost Deleted successfully!");
+          navigate(`/dashboard/user/userposts`);
         }
       })
       .catch((error) => console.error("Error adding review:", error));
@@ -71,7 +74,7 @@ export const MyPost = () => {
                     <th>1</th>
                     <td>{post.postTitle}</td>
                     <td>
-                      <p className="rounded-full badge">{post.tag[0]}</p>
+                      <p className="rounded-full badge">{post.tag}</p>
                     </td>
                     <td>🔥{post.totalUpvote} </td>
                     <td>⬇️ {post.totalDownvote} </td>

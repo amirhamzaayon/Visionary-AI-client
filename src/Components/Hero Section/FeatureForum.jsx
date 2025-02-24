@@ -4,7 +4,7 @@ export const FeatureForum = ({ feature }) => {
   return (
     <div className="flex flex-col h-64 p-6 max-h-64 bg-slate-50 rounded-2xl">
       <div className="space-y-1">
-        <div className="badge">{feature.tag[0]}</div>
+        <div className="bg-gray-300 rounded-full badge">{feature.tag}</div>
         <p className="text-lg font-semibold">{feature.postTitle}</p>
         <p className="text-base font-light">
           Written By <strong>{feature.authorName}</strong>
@@ -18,7 +18,7 @@ export const FeatureForum = ({ feature }) => {
           <strong>{feature.totalComments}+ Comments</strong>
         </div>
         <Link
-          to="/forumdetails"
+          to={`/forumdetails/${feature._id}`}
           className="w-1/3 py-2 text-lg text-center text-white rounded-md bg-slate-800"
         >
           Read More

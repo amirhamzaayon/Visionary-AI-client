@@ -60,7 +60,7 @@ export const ForumDetails = ({ forumDetails }) => {
             <p>{forumDetails.authorEmail}</p>
           </div>
         </div>
-        <div className="badge">Badge</div>
+        <div className="bg-gray-300 rounded-full badge">Badge</div>
       </div>
       {/* <div>
         <img
@@ -74,8 +74,8 @@ export const ForumDetails = ({ forumDetails }) => {
           <p>Published on {forumDetails.postAddedDate}</p>
           <h3 className="text-2xl font-bold">{forumDetails.postTitle}</h3>
           <p className="text-base font-light">
-            Tag Includes:
-            <div className="text-gray-900 border-none badge bg-slate-300">
+            Tag Includes:{" "}
+            <div className="text-gray-900 bg-gray-300 border-none rounded-full badge">
               {forumDetails.tag}
             </div>
           </p>

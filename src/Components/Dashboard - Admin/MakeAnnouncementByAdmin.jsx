@@ -1,54 +1,63 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
+import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 export const MakeAnnouncementByAdmin = () => {
   const navigate = useNavigate();
 
-  const { user } = useContext(AuthContext);
+  const [announcement, setAnnouncement] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/announcement")
+      .then((res) => res.json())
+      .then((data) => {
+        setAnnouncement(data);
+        // Set the announcement data to the state
+      });
+  }, []); // Empty dependencies array to run only once
 
-  const handleAddService = (e) => {
+  const getAnnouncement = announcement[0];
+  console.log(getAnnouncement);
+
+  const handleAddAnnouncement = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     // console.log(formData.entries())
-    const initialData = Object.fromEntries(formData.entries());
+
+    const announcementData = {
+      // Change field name to match backend expectation
+      announcement: formData.get("description"),
+    };
 
     // Add additional data
-    initialData.ownerEmail = user?.email || "anonymous@example.com"; // Default to anonymous if user is undefined
-    initialData.ownerName = user?.displayName || "Anonymous"; // Default to Anonymous if displayName is not available
-    initialData.reviewsInfo = [{ averageRating: 0 }, { totalReviews: 0 }]; // Add a default reviewInfo object
-    initialData.reviews = []; // Add an empty reviews array
-    initialData.addedDate = new Date()
-      .toLocaleString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })
-      .replace(",", "");
+    // initialData.ownerEmail = user?.email || "anonymous@example.com"; // Default to anonymous if user is undefined
+    // initialData.ownerName = user?.displayName || "Anonymous"; // Default to Anonymous if displayName is not available
+    // initialData.reviewsInfo = [{ averageRating: 0 }, { totalReviews: 0 }]; // Add a default reviewInfo object
+    // initialData.reviews = []; // Add an empty reviews array
+    // initialData.addedDate = new Date()
+    //   .toLocaleString("en-US", {
+    //     year: "numeric",
+    //     month: "2-digit",
+    //     day: "2-digit",
+    //     hour: "2-digit",
+    //     minute: "2-digit",
+    //     hour12: true,
+    //   })
+    //   .replace(",", "");
 
-    console.log(initialData);
+    // console.log(initialData);
 
-    fetch("https://insight-hub-server.vercel.app/services", {
-      method: "POST",
+    fetch("http://localhost:5000/add-announcement", {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(initialData),
+      body: JSON.stringify(announcementData),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Service Has been Added.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/features/MyServices");
+        if (data.modifiedCount > 0 || data.upsertedCount > 0) {
+          alert("Announcement added successfully!");
+          navigate(`/dashboard/admin/makeaunouncements`);
         }
       });
   };
@@ -56,7 +65,7 @@ export const MakeAnnouncementByAdmin = () => {
   return (
     <div>
       <div className="max-w-full p-8 bg-white rounded-lg shadow-lg ">
-        <form onSubmit={handleAddService} className="space-y-6">
+        <form onSubmit={handleAddAnnouncement} className="space-y-6">
           {/* Row 4 */}
           <div>
             <label className="block font-semibold text-gray-700">
@@ -65,7 +74,7 @@ export const MakeAnnouncementByAdmin = () => {
             <textarea
               name="description"
               className="w-full px-4 py-2 mt-1 border rounded-lg focus:ring-black focus:border-black"
-              placeholder="Wirte your announcement here"
+              placeholder={getAnnouncement?.announcement}
               rows="4"
             ></textarea>
           </div>

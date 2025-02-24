@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { FeatureForum } from "../../Layouts/FeatureForum";
-import { Announcement } from "../Announcement";
+
 import Slider from "react-slick";
+import { FeatureForum } from "./FeatureForum";
+import { Announcement } from "./Announcement";
 
 export const HeroSection = () => {
   const [featureForums, setFeatureForums] = useState([]);
@@ -13,7 +14,7 @@ export const HeroSection = () => {
         setFeatureForums(data);
       })
       .catch((error) => console.error("Error fetching categories:", error));
-  });
+  }, []);
 
   const settings = {
     dots: true, // Enable dots at the bottom
@@ -29,7 +30,7 @@ export const HeroSection = () => {
     <div className="w-full min-h-screen px-40 pt-40 mt-6 bg-slate-200 rounded-2xl">
       <div className="space-y-6 text-3xl text-gray-900 ">
         <div>
-          <strong className="badge">Visonary AI</strong>
+          <strong className="rounded-full badge">Visonary AI</strong>
           <p className="text-2xl font-light">
             A Forum for Tomorrow’s AI Pioneers
           </p>

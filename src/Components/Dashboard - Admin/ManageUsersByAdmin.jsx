@@ -1,19 +1,21 @@
+import { useOutletContext } from "react-router-dom";
+
 export const ManageUsersByAdmin = () => {
+  const { userProfiles } = useOutletContext();
+  const handleMakeAdmin = (userID) => {
+    fetch(`http://localhost:5000/admin/make-admin/${userID}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          alert("User is now Admin");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  };
   return (
     <div className="min-h-screen p-4 bg-white rounded-xl">
-      <div className="flex flex-row justify-between p-2 bg-gray-100 rounded-lg">
-        <div className="flex flex-row items-center gap-4">
-          <img className="w-10 border-2 rounded-full" src="" alt="" />
-          <div>
-            <p>
-              <strong>Admin Name</strong>
-              <span className="mx-2 rounded-full badge">Admin</span>
-            </p>
-            <p>admin@gmail.com</p>
-          </div>
-        </div>
-        {/* <button className="btn">Update Profile</button> */}
-      </div>
       <div>
         <h3 className="p-4 text-xl ">Mangae Your Users Activity</h3>
         <hr className="h-px bg-gray-300 border-0" />
@@ -32,21 +34,31 @@ export const ManageUsersByAdmin = () => {
               </thead>
               <tbody>
                 {/* row 1 */}
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <p>Commentor Name</p> <p>comentor@email.com</p>
-                  </td>
-                  <td>
-                    <p className="rounded-full badge">Status</p>
-                  </td>
-                  <td>
-                    <p>10</p>
-                  </td>
-                  <td>
-                    <button className="btn">Make Admin</button>
-                  </td>
-                </tr>
+                {userProfiles.map((userProfile, index) => (
+                  <tr key={userProfile._id || index}>
+                    <th>{1 + index}</th>
+                    <td>
+                      <p>{userProfile.userName}</p>{" "}
+                      <p>{userProfile.userEmail}</p>
+                    </td>
+                    <td>
+                      <p className="rounded-full badge">
+                        {userProfile.userBadge}
+                      </p>
+                    </td>
+                    <td>
+                      <p>Null</p>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleMakeAdmin(userProfile._id)}
+                        className="btn"
+                      >
+                        Make Admin
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

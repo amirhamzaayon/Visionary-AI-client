@@ -1,11 +1,11 @@
-export const MyPostHeader = ({ user }) => {
+export const AdminProfileHeader = ({ user }) => {
   return (
     <div>
       <div className="flex flex-row justify-between p-2 bg-gray-100 rounded-lg">
         <div className="flex flex-row items-center gap-4">
           <img
             className="w-10 border-2 rounded-full"
-            // src={user.photoURL}
+            src={user?.photoURL}
             alt=""
           />
           <div>

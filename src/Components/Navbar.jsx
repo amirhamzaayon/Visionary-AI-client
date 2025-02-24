@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 export const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [userRole, setUserRole] = useState(null);
   // console.log(user);
 
   const scrollToSection = (id) => {
@@ -12,6 +13,40 @@ export const NavBar = () => {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/usersInfo/${user.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         // Since the API returns an array, we take the first item's role
+
+  //         setUserRole(data);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching user role:", error);
+  //       });
+  //   }
+  // }, [user]);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`/usersInfo/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          // Since the API returns an array, we take the first item's role
+          if (data && data.length > 0) {
+            console.log(data);
+            setUserRole(data[0].userRole);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user role:", error);
+        });
+    }
+  }, [user]);
+
+  console.log(userRole);
 
   const publiceNavLinks = (
     <>
