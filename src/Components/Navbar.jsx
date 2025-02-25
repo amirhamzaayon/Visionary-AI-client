@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 export const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate();
   // console.log(user);
 
   const scrollToSection = (id) => {
@@ -31,14 +32,10 @@ export const NavBar = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`/usersInfo/${user.email}`)
+      fetch(`http://localhost:5000/usersInfo/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          // Since the API returns an array, we take the first item's role
-          if (data && data.length > 0) {
-            console.log(data);
-            setUserRole(data[0].userRole);
-          }
+          setUserRole(data.userRole);
         })
         .catch((error) => {
           console.error("Error fetching user role:", error);
@@ -144,17 +141,32 @@ export const NavBar = () => {
                 <li>
                   <a className="justify-between">
                     {user.displayName}
-                    <span onClick={logOut} className="p-3 badge">
+                    <span
+                      onClick={() => {
+                        logOut();
+                        navigate("/");
+                      }}
+                      className="p-3 badge"
+                    >
                       Logout
                     </span>
                   </a>
                 </li>
-                <li>
+                {userRole === "Admin" ? (
+                  <li>
+                    <Link to="/dashboard/admin">Admin Dashboard</Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/dashboard/user">Dashboard</Link>
+                  </li>
+                )}
+                {/* <li>
                   <Link to="/dashboard/user">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/dashboard/admin">Admin Dashboard</Link>
-                </li>
+                </li> */}
                 {/* <li>
                   <a>Update Profile</a>
                 </li> */}

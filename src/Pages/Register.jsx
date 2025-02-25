@@ -8,6 +8,33 @@ export const Register = () => {
     useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState({});
+
+  //set user information in mongodb UsersInfo database
+  const setUserInfo = (user) => {
+    const userData = {
+      userID: user?.uid,
+      userName: user.displayName,
+      userEmail: user.email,
+      userProfile: user.photoURL,
+      userBadge: "Bronze", // Default badge
+      userRole: "User", // Default role
+    };
+
+    fetch(`http://localhost:5000/usersInfo`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Account Created Successfully");
+        }
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //get form data
@@ -16,6 +43,7 @@ export const Register = () => {
     // if (name.length < 5) {
     //   setError({ ...error, name: "name should be more then 5 character" });
     // }
+
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
@@ -26,6 +54,7 @@ export const Register = () => {
         setUser(user);
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
+            setUserInfo(user);
             navigate("/");
           })
           .catch((err) => {
@@ -121,7 +150,9 @@ export const Register = () => {
                 <button
                   onClick={() => {
                     signInWithGoogle()
-                      .then(() => {
+                      .then((result) => {
+                        const user = result.user;
+                        setUserInfo(user);
                         navigate("/"); // Navigate to the home page after success
                       })
                       .catch((error) => {
