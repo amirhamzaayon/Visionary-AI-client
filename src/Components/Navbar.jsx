@@ -15,24 +15,9 @@ export const NavBar = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     fetch(`http://localhost:5000/usersInfo/${user.email}`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         // Since the API returns an array, we take the first item's role
-
-  //         setUserRole(data);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching user role:", error);
-  //       });
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/usersInfo/${user.email}`)
+      fetch(`https://visionary-ai-server.vercel.app/usersInfo/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setUserRole(data.userRole);

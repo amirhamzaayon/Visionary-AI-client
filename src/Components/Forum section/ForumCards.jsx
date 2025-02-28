@@ -15,7 +15,7 @@ export const ForumCards = () => {
       tag: selectedCategory === "All" ? "" : selectedCategory,
     }).toString();
 
-    fetch(`http://localhost:5000/search?${query}`)
+    fetch(`https://visionary-ai-server.vercel.app/search?${query}`)
       .then((res) => res.json())
       .then((data) => {
         setForumCards(data);
@@ -25,7 +25,7 @@ export const ForumCards = () => {
 
   // Fetch unique categories for filter dropdown
   const fetchCategories = () => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://visionary-ai-server.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

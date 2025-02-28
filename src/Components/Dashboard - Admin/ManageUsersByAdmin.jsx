@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 export const ManageUsersByAdmin = () => {
   const { userProfiles } = useOutletContext();
   const handleMakeAdmin = (userID) => {
-    fetch(`http://localhost:5000/admin/make-admin/${userID}`, {
+    fetch(`https://visionary-ai-server.vercel.app/admin/make-admin/${userID}`, {
       method: "PUT",
     })
       .then((res) => res.json())

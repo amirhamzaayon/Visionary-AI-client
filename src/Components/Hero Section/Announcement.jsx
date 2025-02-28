@@ -4,7 +4,7 @@ export const Announcement = () => {
   const [announcement, setAnnouncement] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/announcement")
+    fetch("https://visionary-ai-server.vercel.app/announcement")
       .then((res) => res.json())
       .then((data) => {
         setAnnouncement(data);

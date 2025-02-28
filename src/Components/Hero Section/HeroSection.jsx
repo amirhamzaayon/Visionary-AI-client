@@ -8,7 +8,7 @@ export const HeroSection = () => {
   const [featureForums, setFeatureForums] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/top-posts")
+    fetch("https://visionary-ai-server.vercel.app/top-posts")
       .then((res) => res.json())
       .then((data) => {
         setFeatureForums(data);

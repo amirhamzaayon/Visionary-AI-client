@@ -12,7 +12,7 @@ export const AdminDashboardLayout = () => {
   // const email = user?.email || "anonymous@example.com";
 
   useEffect(() => {
-    fetch(`http://localhost:5000/usersInfo`)
+    fetch(`https://visionary-ai-server.vercel.app/usersInfo`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -28,7 +28,7 @@ export const AdminDashboardLayout = () => {
   }, []); // Dependencies array
 
   useEffect(() => {
-    fetch(`http://localhost:5000/usersReports`)
+    fetch(`https://visionary-ai-server.vercel.app/usersReports`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -44,7 +44,7 @@ export const AdminDashboardLayout = () => {
   }, []); // Dependencies array
 
   useEffect(() => {
-    fetch(`http://localhost:5000/search`)
+    fetch(`https://visionary-ai-server.vercel.app/search`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

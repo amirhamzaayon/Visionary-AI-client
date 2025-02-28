@@ -34,7 +34,7 @@ export const AddPost = () => {
 
     console.log(initialData);
 
-    fetch(`http://localhost:5000/newpost`, {
+    fetch(`https://visionary-ai-server.vercel.app/newpost`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

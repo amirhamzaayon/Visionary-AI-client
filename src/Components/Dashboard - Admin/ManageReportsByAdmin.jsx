@@ -5,7 +5,7 @@ export const ManageReportsByAdmin = () => {
   const { reports } = useOutletContext();
 
   const handleDeleteComment = (id) => {
-    fetch(`http://localhost:5000/admin/delete-comment/${id}`, {
+    fetch(`https://visionary-ai-server.vercel.app/admin/delete-comment/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -20,7 +20,7 @@ export const ManageReportsByAdmin = () => {
   };
 
   const handleRejectReport = (id) => {
-    fetch(`http://localhost:5000/admin/reject-comment/${id}`, {
+    fetch(`https://visionary-ai-server.vercel.app/admin/reject-comment/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

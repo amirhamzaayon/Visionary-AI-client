@@ -28,13 +28,16 @@ export const AddCommentForm = ({ onClose }) => {
     };
     console.log(commentData.review);
 
-    fetch(`http://localhost:5000/postdetails/${id}/add-comment`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    })
+    fetch(
+      `https://visionary-ai-server.vercel.app/postdetails/${id}/add-comment`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {

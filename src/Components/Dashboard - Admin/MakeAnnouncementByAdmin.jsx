@@ -7,7 +7,7 @@ export const MakeAnnouncementByAdmin = () => {
 
   const [announcement, setAnnouncement] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/announcement")
+    fetch("https://visionary-ai-server.vercel.app/announcement")
       .then((res) => res.json())
       .then((data) => {
         setAnnouncement(data);
@@ -46,7 +46,7 @@ export const MakeAnnouncementByAdmin = () => {
 
     // console.log(initialData);
 
-    fetch("http://localhost:5000/add-announcement", {
+    fetch("https://visionary-ai-server.vercel.app/add-announcement", {
       method: "PUT",
       headers: {
         "content-type": "application/json",

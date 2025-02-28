@@ -20,7 +20,7 @@ export const Register = () => {
       userRole: "User", // Default role
     };
 
-    fetch(`http://localhost:5000/usersInfo`, {
+    fetch(`https://visionary-ai-server.vercel.app/usersInfo`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

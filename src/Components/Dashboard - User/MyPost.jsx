@@ -18,7 +18,7 @@ export const MyPost = () => {
     const reportInfo = { ...comment, feedback: feedback };
     console.log(reportInfo);
 
-    fetch(`http://localhost:5000/report`, {
+    fetch(`https://visionary-ai-server.vercel.app/report`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +36,9 @@ export const MyPost = () => {
   };
 
   const handleDeletePost = (postID) => {
-    fetch(`http://localhost:5000/post/delete/${postID}`, { method: "delete" })
+    fetch(`https://visionary-ai-server.vercel.app/post/delete/${postID}`, {
+      method: "delete",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {

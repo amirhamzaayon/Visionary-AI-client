@@ -10,7 +10,7 @@ export const UserDashboardLayout = () => {
   const email = user?.email || "anonymous@example.com";
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myposts?email=${email}`)
+    fetch(`https://visionary-ai-server.vercel.app/myposts?email=${email}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

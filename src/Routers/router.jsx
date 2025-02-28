@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     path: "/forumdetails/:id",
     element: <ForumDetailsPage></ForumDetailsPage>,
     loader: ({ params }) =>
-      fetch(`http://localhost:5000/postdetails/${params.id}`),
+      fetch(`https://visionary-ai-server.vercel.app/postdetails/${params.id}`),
   },
   {
     path: "/dashboard",

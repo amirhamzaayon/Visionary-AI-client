@@ -8,7 +8,7 @@ export const ForumDetails = ({ forumDetails }) => {
   const updateInteraction = (vote) => {
     // console.log("Sending vote data:", vote); // Debug log
 
-    fetch(`http://localhost:5000/postdetails/${_id}/vote`, {
+    fetch(`https://visionary-ai-server.vercel.app/postdetails/${_id}/vote`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json", // Fixed typo
